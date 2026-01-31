@@ -31,5 +31,7 @@ public class PlayerScript : MonoBehaviour
 
         RB.linearVelocity = vel;
     }
+    
+    
 }
 
