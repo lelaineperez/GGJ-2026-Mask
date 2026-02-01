@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;
-    public Rigidbody2D rigidBody;
 
+    //numbers
+    public float speed = 5f;
+
+
+    public Rigidbody2D rigidBody;
     public Camera cam;
+    public GameObject DialogueCanvas;
+
+    //bools
+    private bool isTalkingToGuy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        DialogueCanvas.SetActive(false);
+        isTalkingToGuy = false;
     }
 
     // Update is called once per frame
@@ -56,5 +64,22 @@ public class PlayerController : MonoBehaviour
         return vel;
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.name == "Guy_Trigger")
+        {
+            isTalkingToGuy = true;
+        }
+    }
+
+    private void DialogueUI()
+    {
+        if (isTalkingToGuy == true)
+        {
+            DialogueCanvas.SetActive(true);
+        }
+    }
+
 
 }
