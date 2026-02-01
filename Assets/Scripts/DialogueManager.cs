@@ -6,30 +6,33 @@ public class DialogueManager : MonoBehaviour
     [Header("UI References")]
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
-    public TMP_Text promptText;
+    // public TMP_Text promptText;
 
     private WitnessDialogue currentWitness;
 
+    private PlayerScript playerScript;
     void Start()
     {
         if (dialoguePanel != null) dialoguePanel.SetActive(false);
-        if (promptText != null) promptText.gameObject.SetActive(false);
+        // if (promptText != null) promptText.gameObject.SetActive(false);
+
+        
     }
 
     // ===== PROMPT =====
-    public void SetPrompt(string text)
-    {
-        if (promptText == null) return;
+    // public void SetPrompt(string text)
+    // {
+    //     if (promptText == null) return;
+    //
+    //     promptText.gameObject.SetActive(true);
+    //     promptText.text = text;
+    // }
 
-        promptText.gameObject.SetActive(true);
-        promptText.text = text;
-    }
-
-    public void HidePrompt()
-    {
-        if (promptText == null) return;
-        promptText.gameObject.SetActive(false);
-    }
+    // public void HidePrompt()
+    // {
+    //     if (promptText == null) return;
+    //     promptText.gameObject.SetActive(false);
+    // }
 
     // ===== DIALOGUE =====
     public void OpenDialogue(WitnessDialogue witness, string line)
@@ -43,7 +46,7 @@ public class DialogueManager : MonoBehaviour
         if (dialoguePanel != null) dialoguePanel.SetActive(true);
         if (dialogueText != null) dialogueText.text = line;
 
-        SetPrompt("Press E to close");
+        // SetPrompt("Press E to close");
     }
 
     public void CloseDialogue(WitnessDialogue witness)

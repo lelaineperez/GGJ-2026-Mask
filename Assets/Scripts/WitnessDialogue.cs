@@ -34,7 +34,7 @@ public class WitnessDialogue : MonoBehaviour
             if (dialogueManager.IsOpenFor(this))
             {
                 dialogueManager.CloseDialogue(this);
-                dialogueManager.SetPrompt("Press E to talk");
+                // dialogueManager.SetPrompt("Press E to talk");
 
                 if (promptIcon != null)
                     promptIcon.SetActive(true);
@@ -63,7 +63,7 @@ public class WitnessDialogue : MonoBehaviour
 
         if (playerInRange && !dialogueManager.IsAnyDialogueOpen())
         {
-            dialogueManager.SetPrompt("Press E to talk");
+            // dialogueManager.SetPrompt("Press E to talk");
             if (promptIcon != null)
                 promptIcon.SetActive(true);
         }
@@ -77,7 +77,7 @@ public class WitnessDialogue : MonoBehaviour
 
         if (!dialogueManager.IsAnyDialogueOpen())
         {
-            dialogueManager.SetPrompt("Press E to talk");
+            // dialogueManager.SetPrompt("Press E to talk");
             if (promptIcon != null)
                 promptIcon.SetActive(true);
         }
@@ -89,7 +89,7 @@ public class WitnessDialogue : MonoBehaviour
 
         playerInRange = false;
 
-        dialogueManager.HidePrompt();
+        // dialogueManager.HidePrompt();
         if (promptIcon != null)
             promptIcon.SetActive(false);
 
