@@ -7,26 +7,39 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
 
 
+
     public Rigidbody2D rigidBody;
     public Camera cam;
     public GameObject DialogueCanvas;
 
     //bools
     private bool isTalkingToGuy;
+    private bool canMove;
+    private bool dialogueActive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DialogueCanvas.SetActive(false);
         isTalkingToGuy = false;
+        canMove = true;
+        dialogueActive = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        rigidBody.linearVelocity = PlayerMovement();
+        if (canMove == true)
+        {
+            rigidBody.linearVelocity = PlayerMovement();
+        }
+        
 
         cam.gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10);
+
+        DialogueUI();
+
     }
 
 
@@ -67,17 +80,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.name == "Guy_Trigger")
+        if (collider.gameObject.name == "GuyTrigger")
         {
             isTalkingToGuy = true;
         }
     }
 
-    private void DialogueUI()
-    {
-        if (isTalkingToGuy == true)
+    private void OnTriggerExit2D(Collider2D collider){
+        if (collider.gameObject.name == "GuyTrigger")
         {
-            DialogueCanvas.SetActive(true);
+            isTalkingToGuy = false;
+        }
+    }
+
+    private void DialogueUI() //fx that handles dialogue ui 
+    {
+        if (isTalkingToGuy == true && Input.GetKeyDown(KeyCode.Space)) //if you are within guy's collider & presses space
+        {
+            DialogueCanvas.SetActive(true); //dialogue ui will pop up
+            canMove = false;
+            dialogueActive = true;
+            
+        }
+        if (dialogueActive == true && Input.GetMouseButtonDown(0)) // if you are within guy's collider & press left mouse button
+        {
+            DialogueCanvas.SetActive(false); //dialogue will disappear
+            canMove = true; //you can move again
+            dialogueActive = false;
         }
     }
 
