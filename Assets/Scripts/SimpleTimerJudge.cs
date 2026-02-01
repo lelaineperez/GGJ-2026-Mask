@@ -1,9 +1,12 @@
 using UnityEngine;
+using TMPro;
+
 
 public class SimpleTimerJudge : MonoBehaviour
 {
     public float timeLimit = 60f;
     private float timer;
+    public TMP_Text timerText;
     private bool ended = false;
 
     // Drag the X objects here
@@ -37,6 +40,9 @@ public class SimpleTimerJudge : MonoBehaviour
             ended = true;
             Judge();
         }
+
+        if (timerText != null)
+            timerText.text = "Time: " + (int)timer;
     }
 
     void Judge()
